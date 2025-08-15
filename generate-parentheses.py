@@ -21,6 +21,27 @@ class Solution:
         return res
 
 
+class Solution2:
+    def generateParenthesis(self, n: int) -> List[str]:
+
+        res = []
+
+        def backtrack(openN, closeN, s):
+            if openN == closeN == n:
+                res.append(s)
+                return
+
+            if closeN < openN:
+                backtrack(openN, closeN + 1, s + ")")
+
+            if openN < n:
+                backtrack(openN + 1, closeN, s + "(")
+
+        backtrack(0, 0, "")
+
+        return res
+
+
 if __name__ == "__main__":
     solution = Solution()
     n = 3
