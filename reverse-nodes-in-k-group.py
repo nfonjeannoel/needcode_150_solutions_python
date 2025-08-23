@@ -2,6 +2,7 @@
 from typing import Optional
 
 
+# Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -10,24 +11,29 @@ class ListNode:
 class Solution:
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
         dummy = ListNode(0, head)
-        groupPrev = dummy
+        prevGroup = dummy
 
         while True:
-            kth = self.getKth(groupPrev, k)
+            kth = self.getKth(prevGroup, k)
             if not kth:
+                # unable to creat group if len k
                 break
-            groupNext = kth.next
+            nextGroup = kth.next
 
-            prev, cur = kth.next, groupPrev.next
-            while cur != groupNext:
+            # reverse till next Group]
+            prev = kth.next  # so that current will point to prev
+            cur = prevGroup.next  # start of current group
+
+            while cur != nextGroup:
                 tmp = cur.next
                 cur.next = prev
                 prev = cur
                 cur = tmp
 
-            tmp = groupPrev.next
-            groupPrev.next = kth
-            groupPrev = tmp
+            # attach current proup to previous and update previous
+            tmp = prevGroup.next
+            prevGroup.next = kth
+            prevGroup = tmp
 
         return dummy.next
 
