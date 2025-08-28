@@ -18,6 +18,8 @@ class KthLargest:
 
 
 import heapq
+
+
 class KthLargest2:
 
     def __init__(self, k: int, nums: List[int]):
@@ -27,5 +29,3 @@ class KthLargest2:
         self.nums.append(val)
         self.nums.sort()
         return self.nums[len(self.nums) - self.k]
-
-
